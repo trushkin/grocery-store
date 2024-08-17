@@ -28,6 +28,6 @@ public class UserController {
 
   @GetMapping("desired-users")
   public List<User> findUsers() {
-    return null;
+    return userService.findUsers();
   }
 }

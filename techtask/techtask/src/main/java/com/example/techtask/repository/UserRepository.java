@@ -4,6 +4,7 @@ import com.example.techtask.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
@@ -17,4 +18,12 @@ public interface UserRepository extends JpaRepository<User, Integer> {
             limit 1
             """)
     User findUserWithMaxTotalDeliveryCostForYear(int year);
+
+    @Query(nativeQuery = true, value = """
+            select u.id, u.email, u.user_status from users u
+            join orders o on u.id = o.user_id
+            where o.order_status = 'PAID'
+            and extract(year from o.created_at) = :year
+            """)
+    List<User> findUsersWithPaidOrdersForYear(int year);
 }
