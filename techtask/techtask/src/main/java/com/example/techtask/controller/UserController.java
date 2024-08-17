@@ -18,16 +18,16 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
 
-  // DI here
-  private final UserServiceImpl userService;
+    // DI here
+    private final UserServiceImpl userService;
 
-  @GetMapping("desired-user")
-  public User findUser() {
-    return userService.findUser();
-  }
+    @GetMapping("desired-user")
+    public User findUser() {
+        return userService.findUser();
+    }
 
-  @GetMapping("desired-users")
-  public List<User> findUsers() {
-    return userService.findUsers();
-  }
+    @GetMapping("desired-users")
+    public List<User> findUsers() {
+        return userService.findUsers();
+    }
 }
